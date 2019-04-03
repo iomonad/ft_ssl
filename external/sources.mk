@@ -12,8 +12,8 @@
 CRYPTO_SRC =
 
 ENGINE_PTH = engine/
-ENGINE_FLS = core.c
-ENGINE_SRC = $(addsuffix $(ENGINE_FLS), $(ENGINE_PTH))
+ENGINE_FLS = core.c compute.c exceptions.c
+ENGINE_SRC = $(addprefix $(ENGINE_PTH), $(ENGINE_FLS))
 
 # Centralized resources
 SRCS = $(ENGINE_SRC) $(CRYPTO_SRC)
