@@ -16,11 +16,13 @@ else
 	CC = clang
 endif
 LD = ld
-CFLAGS = -Wall -Werror -Wextra -O2 $(IFLAGS)
-IFLAGS = -I$(INCDIR)
+CFLAGS = -Wall -Werror -Wextra -O2 $(IFLAGS) $(LFTDIR)/libft.a
+IFLAGS = -I$(INCDIR) -I$(LFTINC)
 NPROC = $(shell sysctl -n hw.physicalcpu)
-MAKEFLAGS += --silent -k -j$(NPROC) --no-print-directory
+MAKEFLAGS += --silent -k --no-print-directory # -j$(NPROC)
 
 # Nomenclature
 INCDIR = includes/
+LFTDIR = libft
+LFTINC = $(LFTDIR)/includes
 vpath %.h $(INCDIR)

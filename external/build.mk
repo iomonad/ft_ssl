@@ -11,9 +11,11 @@
 TARGET = ft_ssl
 
 all:
+	$(MAKE) -C $(LFTDIR)
 	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
 
 clean:
+	$(MAKE) -C $(LFTDIR) fclean
 	@rm -f $(TARGET)
 
 fclean: clean
