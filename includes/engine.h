@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/03 15:20:40 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/03 16:15:05 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_options {
 	t_bool		q;
 	t_bool		r;
 	t_hash		type;
+	char		*string;
 }				t_options;
 
 /*

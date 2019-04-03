@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:58:16 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/03 15:13:52 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/03 16:16:00 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	process(t_options *opts, t_list *plist)
 {
-	(void)opts;
 	(void)plist;
 	ft_printf("Waiting for hash algorithm implementation\n");
-	return (0);
+	ft_printf("p = %d\nq = %d\nr = %d\ns = %s\n", opts->p, opts->q, opts->r, opts->string);
+	return (1);
 }

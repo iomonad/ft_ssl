@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 12:04:46 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/03 15:20:24 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/03 16:23:03 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static void		parseopts(t_options *opts, int argc, char **argv)
 	opts->p = FALSE;
 	opts->q = FALSE;
 	opts->r = FALSE;
+	opts->string = NULL;
 	opts->type = hashtype(argv[1]);
-	while ((c = ft_getopt(argc, argv, "pqrs:")) != -1)
+	while ((c = ft_getopt(argc - 1, &argv[1], "pqrs:")) != -1)
 	{
 		if (c == 'p')
 			opts->p = TRUE;
@@ -47,6 +48,8 @@ static void		parseopts(t_options *opts, int argc, char **argv)
 			opts->q = TRUE;
 		else if (c == 'r')
 			opts->r = TRUE;
+		else if (c == 's')
+			opts->string = ft_strdup(g_optarg);
 		else
 			usage();
 	}
