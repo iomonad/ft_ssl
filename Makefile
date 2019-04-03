@@ -12,5 +12,6 @@ SELF_DIR=external
 
 include $(SELF_DIR)/system.mk
 include $(SELF_DIR)/build.mk
+include $(SELF_DIR)/sources.mk
 
 .PHONY: all clean fclean re

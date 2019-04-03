@@ -8,13 +8,13 @@
 # See: https://github.com/iomonad/ft_ssl/blob/master/LICENSE
 #
 
-BIN = ft_ssl
+TARGET = ft_ssl
 
 all:
-	@touch $(BIN)
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
 
 clean:
-	@rm -f $(BIN)
+	@rm -f $(TARGET)
 
 fclean: clean
 
