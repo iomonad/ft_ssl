@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 14:53:41 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/03 16:23:01 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/04 14:43:21 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ static void	invalid_algo(char *tipep)
 ** @todo: Handle invalid input exceptions
 */
 
-t_bool		is_handlable(t_options *opts, t_list *plist, char *tipep)
+t_bool		is_handlable(t_options *opts, char *tipep)
 {
-	(void)plist;
 	if (opts->type != UNKNOWN)
 		return (TRUE);
 	else

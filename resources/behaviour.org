@@ -1,0 +1,4 @@
+* MD5
+- [ ] Process list of files after options
+- [ ] When file is used, stdin is disabled
+- [ ] Le logiciel doit pouvoir process plusieurs fois l'option `-s`
