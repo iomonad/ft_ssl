@@ -8,8 +8,12 @@
 # See: https://github.com/iomonad/ft_ssl/blob/master/LICENSE
 #
 
-#
-CRYPTO_SRC =
+MD5_PTH = md5/
+MD5_FLS = md5.c
+MD5_SRC = $(addprefix $(MD5_PTH), $(MD5_FLS))
+
+CRYPTO_PTH = crypto/
+CRYPTO_SRC = $(addprefix $(CRYPTO_PTH), $(MD5_SRC))
 
 ENGINE_PTH = engine/
 ENGINE_FLS = core.c compute.c exceptions.c utils.c

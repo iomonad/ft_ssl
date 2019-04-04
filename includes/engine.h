@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 14:50:24 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:20:09 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef enum	e_hash {
 	SHA256,
 	SHA224,
 	SHA384,
-	SHA512
+	SHA512,
+	SENTINEL
 }				t_hash;
 
 /*
