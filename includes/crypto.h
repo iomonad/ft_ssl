@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 16:29:30 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 12:11:38 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 
 # include <algorithms.h>
 
-typedef struct s_interface
+typedef struct		s_interface
 {
-	t_hash type;
-	int (*hashf)(const char *chunk);
-} t_interface;
+	t_hash			type;
+	int				(*hashf)(const t_options *opts,
+						const t_input *input);
+}					t_interface;
 
-static t_interface g_interface[] = {
+static t_interface	g_interface[] = {
 	{MD5, md5},
 	{SHA224, NULL},
 	{SHA256, NULL},

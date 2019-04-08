@@ -6,12 +6,13 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:54:01 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 15:06:38 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 11:33:31 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <engine.h>
+#include <fcntl.h>
 
 t_hash		hashtype(char *type)
 {
@@ -73,4 +74,14 @@ void		parseinput(int argc, char *argv[], t_dlist **head)
 	g_optind++;
 	while (g_optind < argc)
 		memoize(FARG, argv[g_optind++], head);
+}
+
+int			ffopen(const char *path)
+{
+	int		fd;
+
+	if ((fd = open(path, O_RDONLY)) < 0)
+		return (fferror("error file don't exit", path));
+	else
+		return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 14:53:41 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 14:43:21 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 11:31:01 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ void		usage(void)
 {
 	ft_fprintf(2, "usage: ./ft_ssl [md5|sha256] [-pqrs]\n");
 	exit(1);
+}
+
+int			fferror(const char *msg, const char *file)
+{
+	ft_fprintf(2, "ft_ssl: %s: %s\n", file, msg);
+	return (-1);
 }

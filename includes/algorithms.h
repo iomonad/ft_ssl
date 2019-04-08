@@ -6,13 +6,16 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:28:53 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 16:29:27 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 12:10:32 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGORITHMS_H
 # define ALGORITHMS_H
 
-int		md5(const char *chunk);
+# define MD5_CHUNK_SIZE 4096
 
-# endif
+int			md5(const t_options *opts,
+				const t_input *input);
+
+#endif

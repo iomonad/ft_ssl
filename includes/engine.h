@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 16:20:09 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 11:42:20 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,12 @@ typedef struct	s_options {
 
 int				process(t_options *opts, t_dlist *plist);
 t_bool			is_handlable(t_options *opts, char *tipep);
-void			usage(void);
 t_hash			hashtype(char *type);
 void			memoize(t_meth method, char *entities, t_dlist **head);
 void			parseopts(t_options *opts, int ac, char **av, t_dlist **p);
 void			parseinput(int argc, char *argv[], t_dlist **plist);
+int				fferror(const char *msg, const char *file);
+int				ffopen(const char *path);
+void			usage(void);
 
 #endif
