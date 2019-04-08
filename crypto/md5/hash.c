@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:04:28 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:07:53 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ static void		hash_loop(uint32_t *tstate,
 		g = (7 * i) % 16;
 	}
 	f = f + tstate[0] + g_k[i] + words[g];
+	printf("rotateLeft(%x + %x + %x + %x, %d)\n", tstate[0], f, g_k[i], words[g], g_r[i]);
 	swap_state(f, tstate, i);
 }
 
@@ -139,9 +140,15 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 	i = 0;
 	ft_memcpy(tstate, hash->state, 4 * sizeof(uint32_t));
 	words = (uint32_t *)chunk;
-	while (++i < 64)
+	while (i < 64)
+	{
 		hash_loop(tstate, words, i);
+		i++;
+	}
 	i = 0;
-	while (++i < 4)
+	while (i < 4)
+	{
 		hash->state[i] += tstate[i];
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:28:53 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:36:49 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 16:54:58 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <crypto.h>
 # include <engine.h>
 
-# define MD5_CHUNK_SIZE 4096
+# define MD5_CHUNK_SIZE 64
 
 void		init_md5(t_hashing *hash);
 void		md5_hash(t_hashing *hash, const char *chunk);

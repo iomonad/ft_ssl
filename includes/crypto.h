@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:32:01 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 16:46:42 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static t_interface	g_interface[] = {
 ** Helper prototypes
 */
 
-int		pad_512(t_hashing *hash, ssize_t ret, const char *chunk, uint64_t len);
+int					pad_512(t_hashing *hash, ssize_t ret,
+						const char *chunk, uint64_t len);
 
 #endif

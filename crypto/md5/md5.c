@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:21:32 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:36:03 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:42:06 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,23 @@
 #include <stdlib.h>
 
 static ssize_t	process_md5(const int fd, t_hashing *hash,
-						const t_options *opts)
+							const t_options *opts,
+							const t_input *input)
 {
 	ssize_t ret, i = 0;
-	char	chunk[MD5_CHUNK_SIZE];
+	char	chunk[4096];
 
 	init_md5(hash);
-	ft_memset(chunk, '\0', MD5_CHUNK_SIZE);
-	while ((ret = read(fd, chunk, MD5_CHUNK_SIZE)) == hash->clen)
+	while ((ret = read(fd, chunk, hash->clen)) == hash->clen)
 	{
 		if (opts->p)
 			write(1, chunk, ret);
 		md5_hash(hash, chunk);
 		i += ret;
 	}
+	i += ret;
 	pad_512(hash, ret, chunk, i * 8);
+	md5_print(hash, input->input);
 	return (i);
 }
 
@@ -62,8 +64,7 @@ int				md5(const t_options *opts,
 	if (input->method == FARG && input->input != NULL)
 		if ((fd = ffopen(input->input)) < 0)
 			return (fd);
-	process_md5(fd, &hash, opts);
+	process_md5(fd, &hash, opts, input);
 	post_process(fd);
-	md5_print(&hash, input->input);
 	return (0);
 }
