@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   padding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 16:28:53 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:36:49 by iomonad          ###   ########.fr       */
+/*   Created: 2019/04/08 15:19:35 by iomonad           #+#    #+#             */
+/*   Updated: 2019/04/08 16:32:52 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+#include <crypto.h>
 
-# include <crypto.h>
-# include <engine.h>
+int		pad_512(t_hashing *hash, ssize_t ret, const char *chunk, uint64_t len)
+{
+	char	data[1024];
 
-# define MD5_CHUNK_SIZE 4096
-
-void		init_md5(t_hashing *hash);
-void		md5_hash(t_hashing *hash, const char *chunk);
-int			md5_print(t_hashing *hash, const char *input);
-int			md5(const t_options *opts,
-				const t_input *input);
-
-#endif
+	ft_memcpy(data, chunk, ret);
+	data[ret++] = 0x80;
+	while (ret % hash->clen != hash->clen - 8)
+		data[ret++] = 0x00;
+	ft_memcpy(data + ret, &len, sizeof(len));
+	md5_hash(hash, data);
+	if (ret > hash->clen)
+		md5_hash(hash, data + hash->clen);
+	return (1);
+}

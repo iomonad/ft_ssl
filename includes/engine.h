@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 11:42:20 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/08 15:36:42 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ENGINE_H
 
 # include <libft.h>
+# include <stdint.h>
 
 # define TMD5    "md5"
 # define TSHA256 "sha256"
@@ -71,6 +72,22 @@ typedef struct	s_options {
 	t_bool		r;
 	t_hash		type;
 }				t_options;
+
+/*
+** @info Hashing algorithm structure
+**       storage.
+** @elem state state storage
+** @elem dlen message digest lenght
+** @elem clen chunck lenght
+*/
+
+typedef struct	s_hashing
+{
+	uint32_t	state[4];
+	ssize_t		dlen;
+	ssize_t		clen;
+	char		*output;
+}				t_hashing;
 
 /*
 ** @info Namespace prototypes.

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 16:28:53 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 16:36:49 by iomonad          ###   ########.fr       */
+/*   Created: 2019/04/08 16:07:54 by iomonad           #+#    #+#             */
+/*   Updated: 2019/04/08 16:37:25 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+#include <libft.h>
+#include <crypto.h>
 
-# include <crypto.h>
-# include <engine.h>
-
-# define MD5_CHUNK_SIZE 4096
-
-void		init_md5(t_hashing *hash);
-void		md5_hash(t_hashing *hash, const char *chunk);
-int			md5_print(t_hashing *hash, const char *input);
-int			md5(const t_options *opts,
-				const t_input *input);
-
-#endif
+int		md5_print(t_hashing *hash, const char *input)
+{
+	ft_printf("MD5 (%s) = %x%x%x%x\n",
+			  input,
+			  hash->state[0],
+			  hash->state[1],
+			  hash->state[2],
+			  hash->state[3]);
+	return (1);
+}

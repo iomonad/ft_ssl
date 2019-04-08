@@ -9,11 +9,16 @@
 #
 
 MD5_PTH = md5/
-MD5_FLS = md5.c
+MD5_FLS = md5.c hash.c output.c
 MD5_SRC = $(addprefix $(MD5_PTH), $(MD5_FLS))
 
+COMMONS_PTH = commons/
+COMMONS_FLS = padding.c
+COMMONS_SRC = $(addprefix $(COMMONS_PTH), $(COMMONS_FLS))
+
 CRYPTO_PTH = crypto/
-CRYPTO_SRC = $(addprefix $(CRYPTO_PTH), $(MD5_SRC))
+CRYPTO_SRC = $(addprefix $(CRYPTO_PTH), $(MD5_SRC)) \
+             $(addprefix $(CRYPTO_PTH), $(COMMONS_SRC))
 
 ENGINE_PTH = engine/
 ENGINE_FLS = core.c compute.c exceptions.c utils.c
