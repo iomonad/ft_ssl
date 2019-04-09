@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+SEED=(
+	/etc/passwd
+	/etc/bashrc
+	/etc/irbrc
+	/etc/emond.d/emond.plist
+	~/.zshrc
+)
+
+MINE=~/Projects/ft_ssl/ft_ssl
+ORIG=/sbin/md5
+
+for i in $SEED; do
+
+	$MINE md5 $i > /tmp/a
+	$ORIG $i > /tmp/b
+
+	DIFF=$(diff /tmp/a /tmp/b)
+	if [ "$DIFF" != "" ]
+	then
+		echo "Test failed for $i" && exit
+	else
+		echo "Test done for $i"
+	fi
+done
