@@ -11,6 +11,7 @@ FAILURE=()
 
 MINE=~/Projects/ft_ssl/ft_ssl
 ORIG=/sbin/md5
+k=0
 
 for i in $SEED; do
 	$MINE md5 $i > /tmp/a
@@ -21,11 +22,15 @@ for i in $SEED; do
 	then
 		FAILURE+=($i)
 	else
-		echo "Test for $i done."
+		echo "[$k] Test for $i done."
 	fi
+	k=$((k + 1));
 done
 
 echo ""
 for x in $FAILURE; do
 	echo "Failed test for: $x";
 done
+
+t=$((k - ${#FAILURE[@]}));
+echo "\nPassed $t/$k tests."

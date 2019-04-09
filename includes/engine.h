@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 15:36:42 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 15:21:42 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef struct	s_options {
 ** @elem state state storage
 ** @elem dlen message digest lenght
 ** @elem clen chunck lenght
+** @elem i_f init fuction
+** @elem i_f hash function
+** @elem i_f padding function
+** @elem i_f output function
 */
 
 typedef struct	s_hashing
@@ -86,6 +90,10 @@ typedef struct	s_hashing
 	uint32_t	state[4];
 	ssize_t		dlen;
 	ssize_t		clen;
+	int			(*i_f)(struct s_hashing *);
+	int			(*h_f)(struct s_hashing *, const char *);
+	int			(*p_f)(struct s_hashing *hash, ssize_t, char *, uint64_t);
+	int			(*f_f)(struct s_hashing *hash);
 	char		*output;
 }				t_hashing;
 
