@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/09 13:27:46 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:09:23 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static const	uint32_t g_k[] = {
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
+/*
+** @note initialize datastructure
+*/
+
 void			init_md5(t_hashing *hash)
 {
 	hash->state[0] = 0x67452301;
@@ -65,9 +69,25 @@ void			init_md5(t_hashing *hash)
 	hash->clen = 64;
 }
 
-static int      left_rotate(uint32_t n, uint32_t d)
+/*
+** @note compute left bit rotation
+*/
+
+static int		left_rotate(uint32_t n, uint32_t d)
 {
-        return ((n << d) | (n >> (32 - d)));
+	return ((n << d) | (n >> (32 - d)));
+}
+
+/*
+** @note Swap states
+*/
+
+static void		swap_state(uint32_t *tstate, uint32_t f, uint32_t i)
+{
+	tstate[0] = tstate[3];
+	tstate[3] = tstate[2];
+	tstate[2] = tstate[1];
+	tstate[1] += left_rotate(f, g_r[i]);
 }
 
 /*
@@ -91,8 +111,8 @@ static int      left_rotate(uint32_t n, uint32_t d)
 */
 
 static void		hash_loop(uint32_t *tstate,
-					  uint32_t *words,
-					  uint32_t i)
+					uint32_t *words,
+					uint32_t i)
 {
 	uint32_t	f;
 	uint32_t	g;
@@ -118,23 +138,12 @@ static void		hash_loop(uint32_t *tstate,
 		g = (7 * i) % 16;
 	}
 	f = f + tstate[0] + g_k[i] + words[g];
-
-	/* Swap all the shit
-	 */
-	tstate[0] = tstate[3];
-	tstate[3] = tstate[2];
-	tstate[2] = tstate[1];
-	tstate[1] += left_rotate(f, g_r[i]);
+	swap_state(tstate, f, i);
 }
 
-static void		debug_state(t_hashing *hash, const char *msg)
-{
-	printf("%s\n", msg);
-	printf("state[0] = 0x%x\n", hash->state[0]);
-	printf("state[1] = 0x%x\n", hash->state[1]);
-	printf("state[2] = 0x%x\n", hash->state[2]);
-	printf("state[3] = 0x%x\n", hash->state[3]);
-}
+/*
+** @note MD5 Hashing algorithm wrapper
+*/
 
 void			md5_hash(t_hashing *hash, const char *chunk)
 {
@@ -145,10 +154,6 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 	i = 0;
 	ft_memcpy(tstate, hash->state, 4 * sizeof(uint32_t));
 	words = (uint32_t *)chunk;
-	for (int j = 0; j < hash->clen; j++)
-		printf("%2.2hhx ", chunk[j]);
-	printf("-------------\n");
-	debug_state(hash, "BEFORE");
 	while (i < 64)
 	{
 		hash_loop(tstate, words, i);
@@ -160,6 +165,4 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 		hash->state[i] += tstate[i];
 		i++;
 	}
-	debug_state(hash, "AFTER");
-	printf("-------------\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:21:32 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/09 12:20:38 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 13:44:05 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,11 @@ static ssize_t	process_md5(const int fd, t_hashing *hash,
 	{
 		if (opts->p)
 			write(1, chunk, ret);
-		printf("Read with len: %zu and content: [%s]\n", ret, chunk);
 		md5_hash(hash, chunk);
 		i += ret;
 	}
 	i += ret;
-
 	pad_512(hash, ret, chunk, i * 8);
-
-	printf("Final State: \n");
-	printf("state[0] = 0x%x\n", hash->state[0]);
-	printf("state[1] = 0x%x\n", hash->state[1]);
-	printf("state[2] = 0x%x\n", hash->state[2]);
-	printf("state[3] = 0x%x\n", hash->state[3]);
-
 	md5_print(hash, input->input);
 	return (i);
 }
@@ -73,9 +64,10 @@ static int		post_process(const int fd)
 int				md5(const t_options *opts,
 				const t_input *input)
 {
-	int			fd = 0;
+	int			fd;
 	t_hashing	hash;
 
+	fd = STDIN;
 	ft_bzero(&hash, sizeof(t_hash));
 	if (input->method == FARG && input->input != NULL)
 		if ((fd = ffopen(input->input)) < 0)
