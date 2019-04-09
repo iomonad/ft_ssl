@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/09 11:05:46 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 13:27:46 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 	i = 0;
 	ft_memcpy(tstate, hash->state, 4 * sizeof(uint32_t));
 	words = (uint32_t *)chunk;
+	for (int j = 0; j < hash->clen; j++)
+		printf("%2.2hhx ", chunk[j]);
 	printf("-------------\n");
 	debug_state(hash, "BEFORE");
 	while (i < 64)
