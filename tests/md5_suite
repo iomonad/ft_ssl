@@ -1,26 +1,31 @@
 #!/bin/zsh
 
 SEED=(
-	/etc/passwd
-	/etc/bashrc
-	/etc/irbrc
-	/etc/emond.d/emond.plist
-	~/.zshrc
+	/usr/lib/*.dylib
+	/etc/*.conf
+	/etc/*rc
+	/usr/lib/*.dylib
 )
+
+FAILURE=()
 
 MINE=~/Projects/ft_ssl/ft_ssl
 ORIG=/sbin/md5
 
 for i in $SEED; do
-
 	$MINE md5 $i > /tmp/a
 	$ORIG $i > /tmp/b
 
 	DIFF=$(diff /tmp/a /tmp/b)
 	if [ "$DIFF" != "" ]
 	then
-		echo "Test failed for $i" && exit
+		FAILURE+=($i)
 	else
-		echo "Test done for $i"
+		echo "Test for $i done."
 	fi
+done
+
+echo ""
+for x in $FAILURE; do
+	echo "Failed test for: $x";
 done
