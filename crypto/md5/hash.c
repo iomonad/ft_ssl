@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 18:07:53 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 11:05:46 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,6 @@ static int      left_rotate(uint32_t n, uint32_t d)
         return ((n << d) | (n >> (32 - d)));
 }
 
-
-static void swap_state(uint32_t f, uint32_t *tmp, uint32_t i)
-{
-	tmp[0] = tmp[3];
-	tmp[3] = tmp[2];
-	tmp[2] = tmp[1];
-	tmp[1] += left_rotate(f, g_r[i]);
-}
-
 /*
 ** L'algorithme principal travaille avec un état sur 128 bits.
 ** Il est lui-même divisé en 4 mots de 32 bits (en informatique,
@@ -127,8 +118,22 @@ static void		hash_loop(uint32_t *tstate,
 		g = (7 * i) % 16;
 	}
 	f = f + tstate[0] + g_k[i] + words[g];
-	printf("rotateLeft(%x + %x + %x + %x, %d)\n", tstate[0], f, g_k[i], words[g], g_r[i]);
-	swap_state(f, tstate, i);
+
+	/* Swap all the shit
+	 */
+	tstate[0] = tstate[3];
+	tstate[3] = tstate[2];
+	tstate[2] = tstate[1];
+	tstate[1] += left_rotate(f, g_r[i]);
+}
+
+static void		debug_state(t_hashing *hash, const char *msg)
+{
+	printf("%s\n", msg);
+	printf("state[0] = 0x%x\n", hash->state[0]);
+	printf("state[1] = 0x%x\n", hash->state[1]);
+	printf("state[2] = 0x%x\n", hash->state[2]);
+	printf("state[3] = 0x%x\n", hash->state[3]);
 }
 
 void			md5_hash(t_hashing *hash, const char *chunk)
@@ -140,6 +145,8 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 	i = 0;
 	ft_memcpy(tstate, hash->state, 4 * sizeof(uint32_t));
 	words = (uint32_t *)chunk;
+	printf("-------------\n");
+	debug_state(hash, "BEFORE");
 	while (i < 64)
 	{
 		hash_loop(tstate, words, i);
@@ -151,4 +158,6 @@ void			md5_hash(t_hashing *hash, const char *chunk)
 		hash->state[i] += tstate[i];
 		i++;
 	}
+	debug_state(hash, "AFTER");
+	printf("-------------\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:21:32 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 17:42:06 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/09 10:49:37 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,20 @@
 #include <algorithms.h>
 #include <stdlib.h>
 
+/*
+** @note Process md5 algorithm by
+**       polling lazyly file descriptor
+*/
+
 static ssize_t	process_md5(const int fd, t_hashing *hash,
 							const t_options *opts,
 							const t_input *input)
 {
-	ssize_t ret, i = 0;
-	char	chunk[4096];
+	ssize_t		ret;
+	ssize_t		i;
+	char		chunk[4096];
 
+	i = 0;
 	init_md5(hash);
 	while ((ret = read(fd, chunk, hash->clen)) == hash->clen)
 	{
@@ -33,6 +40,11 @@ static ssize_t	process_md5(const int fd, t_hashing *hash,
 	}
 	i += ret;
 	pad_512(hash, ret, chunk, i * 8);
+	printf("Final State: \n");
+	printf("state[0] = 0x%x\n", hash->state[0]);
+	printf("state[1] = 0x%x\n", hash->state[1]);
+	printf("state[2] = 0x%x\n", hash->state[2]);
+	printf("state[3] = 0x%x\n", hash->state[3]);
 	md5_print(hash, input->input);
 	return (i);
 }
