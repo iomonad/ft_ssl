@@ -6,11 +6,16 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:34:07 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:38:15 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <crypto.h>
+
+/*
+** @note Execution wrapper for file descriptor
+**       based processing.
+*/
 
 static ssize_t	exec(const int fd, t_hashing *hash,
 							const t_options *opts,
@@ -35,6 +40,11 @@ static ssize_t	exec(const int fd, t_hashing *hash,
 	return (i);
 }
 
+/*
+** @note Execution wrapper for
+**       string input
+*/
+
 static ssize_t	exec_string(t_hashing *hash,
 							const t_options *opts,
 							const t_input *input)
@@ -56,6 +66,11 @@ static ssize_t	exec_string(t_hashing *hash,
 	return (i);
 }
 
+/*
+** @note Post execution helper to properly
+**       close associated file descriptors.
+*/
+
 static int		post_process(const int fd)
 {
 	if (fd != 0)
@@ -68,6 +83,11 @@ static int		post_process(const int fd)
 	}
 	return (0);
 }
+
+/*
+** @note Determine function set depending
+**       configuration table.
+*/
 
 static void		prepare(t_hashing *hash,
 						const t_options *opts,
@@ -90,6 +110,12 @@ static void		prepare(t_hashing *hash,
 		i++;
 	}
 }
+
+/*
+** @note Meta pipeline that compute hashing
+**       algorithm based on hashing functions
+**       & helpers references.
+*/
 
 int				pipeline(const t_options *opts,
 					const t_input *input)

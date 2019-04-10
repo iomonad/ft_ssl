@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:32:28 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:40:39 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 
 # define MD5_CHUNK_SIZE 64
 
+/*
+** MD5 Prototypes
+*/
+
 void				init_md5(t_hashing *hash);
 void				md5_hash(t_hashing *hash, const char *chunk);
-int					pprinter(t_hashing *hash, const t_input *input);
 
 /*
 ** Helper prototypes
@@ -28,6 +31,11 @@ int					pprinter(t_hashing *hash, const t_input *input);
 
 int					pad_512(t_hashing *hash, ssize_t ret,
 						const char *chunk, uint64_t len);
+int					pprinter(t_hashing *hash, const t_input *input);
+
+/*
+** Interface table
+*/
 
 typedef struct		s_interface
 {
@@ -37,6 +45,10 @@ typedef struct		s_interface
 	int				(*p_f)(struct s_hashing *, ssize_t, const char *, uint64_t);
 	int				(*o_f)(struct s_hashing *, const struct s_input *);
 }					t_interface;
+
+/*
+** Utils function hashset reference
+*/
 
 static t_interface	g_interface[] = {
 	{MD5, md5_hash, init_md5, pad_512, pprinter},
