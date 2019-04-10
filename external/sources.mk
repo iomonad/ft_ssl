@@ -21,7 +21,7 @@ CRYPTO_SRC = $(addprefix $(CRYPTO_PTH), $(MD5_SRC)) \
              $(addprefix $(CRYPTO_PTH), $(COMMONS_SRC))
 
 ENGINE_PTH = engine/
-ENGINE_FLS = core.c compute.c exceptions.c utils.c
+ENGINE_FLS = core.c compute.c exceptions.c utils.c pipeline.c
 ENGINE_SRC = $(addprefix $(ENGINE_PTH), $(ENGINE_FLS))
 
 # Centralized resources

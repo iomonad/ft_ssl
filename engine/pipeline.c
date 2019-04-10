@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.c                                              :+:      :+:    :+:   */
+/*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/04 16:21:32 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:27:39 by iomonad          ###   ########.fr       */
+/*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
+/*   Updated: 2019/04/10 13:27:19 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <engine.h>
 #include <crypto.h>
-#include <stdlib.h>
 
-/*
-** @note Process md5 algorithm by
-**       polling lazyly file descriptor
-*/
-
-static ssize_t	process_md5(const int fd, t_hashing *hash,
+static ssize_t	exec(const int fd, t_hashing *hash,
 							const t_options *opts,
 							const t_input *input)
 {
@@ -29,38 +21,38 @@ static ssize_t	process_md5(const int fd, t_hashing *hash,
 	char		chunk[4096];
 
 	i = 0;
-	init_md5(hash);
+	hash->i_f(hash);
 	while ((ret = read(fd, chunk, hash->clen)) == hash->clen)
 	{
 		if (opts->p)
 			write(1, chunk, ret);
-		md5_hash(hash, chunk);
+		hash->h_f(hash, chunk);
 		i += ret;
 	}
 	i += ret;
-	pad_512(hash, ret, chunk, i * 8);
-	md5_print(hash, input);
+	hash->p_f(hash, ret, chunk, i * 8);
+	hash->o_f(hash, input);
 	return (i);
 }
 
-static ssize_t	process_md5_string(t_hashing *hash,
-								   const t_options *opts,
-	                               const t_input *input)
+static ssize_t	exec_string(t_hashing *hash,
+							const t_options *opts,
+							const t_input *input)
 {
 	ssize_t		i;
 	uint64_t	len;
 
-	init_md5(hash);
+	hash->i_f(hash);
 	len = ft_strlen(input->input);
 	i = len;
 	(void)opts;
 	while (i > hash->clen)
 	{
-		md5_hash(hash, input->input + (len - i));
+		hash->h_f(hash, input->input + (len - i));
 		i -= hash->clen;
 	}
-	pad_512(hash, i, input->input + (len - i), len * 8);
-	md5_print(hash, input);
+	hash->p_f(hash, i, input->input + (len - i), len * 8);
+	hash->o_f(hash, input);
 	return (i);
 }
 
@@ -77,26 +69,50 @@ static int		post_process(const int fd)
 	return (0);
 }
 
+static void		prepare(t_hashing *hash,
+						const t_options *opts,
+						int i)
+{
+	while (g_interface[i].type != SENTINEL)
+	{
+//		printf("uu");
+		if (g_interface[i].type == opts->type)
+		{
+			if ((*g_interface[i].h_f) == NULL)
+				ft_printf("Processing un-implemented algorithm.\n");
+			else
+			{
+				hash->h_f =  (*g_interface[i].h_f);
+				hash->i_f =  (*g_interface[i].i_f);
+				hash->p_f =  (*g_interface[i].p_f);
+				hash->o_f =  (*g_interface[i].o_f);
+			}
+		}
+		i++;
+	}
+}
+
 /*
-** @note
+**
 */
 
-int				md5(const t_options *opts,
-				const t_input *input)
+int				pipeline(const t_options *opts,
+						 const t_input *input)
 {
 	int			fd;
 	t_hashing	hash;
 
 	fd = STDIN;
 	ft_bzero(&hash, sizeof(t_hash));
+	prepare(&hash, opts, 0x0);
 	if (input->method == FARG && input->input != NULL)
 	{
 		if ((fd = ffopen(input->input)) < 0)
 			return (fd);
-		process_md5(fd, &hash, opts, input);
+		exec(fd, &hash, opts, input);
 		return (post_process(fd));
 	}
 	else if (input->method == STRING && input->input != NULL)
-		process_md5_string(&hash, opts, input);
+		exec_string(&hash, opts, input);
 	return (0);
 }

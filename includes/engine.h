@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 10:51:32 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:15:22 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ typedef struct	s_options {
 ** @elem dlen message digest lenght
 ** @elem clen chunck lenght
 ** @elem i_f init fuction
-** @elem i_f hash function
-** @elem i_f padding function
-** @elem i_f output function
+** @elem h_f hash function
+** @elem p_f padding function
+** @elem o_f output function
 */
 
 typedef struct	s_hashing
@@ -90,6 +90,10 @@ typedef struct	s_hashing
 	uint32_t	state[4];
 	ssize_t		dlen;
 	ssize_t		clen;
+	void		(*h_f)(struct s_hashing *, const char *);
+	void		(*i_f)(struct s_hashing *);
+	int			(*p_f)(struct s_hashing *, ssize_t, const char *, uint64_t);
+	int			(*o_f)(struct s_hashing *, const struct s_input *);
 	char		*output;
 }				t_hashing;
 
@@ -106,5 +110,7 @@ void			parseinput(int argc, char *argv[], t_dlist **plist);
 int				fferror(const char *msg, const char *file);
 int				ffopen(const char *path);
 void			usage(void);
+int				pipeline(const t_options *opts,
+						 const t_input *input);
 
 #endif
