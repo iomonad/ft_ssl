@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:15:22 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:32:50 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ int				fferror(const char *msg, const char *file);
 int				ffopen(const char *path);
 void			usage(void);
 int				pipeline(const t_options *opts,
-						 const t_input *input);
+					const t_input *input);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:26:07 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:32:28 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@
 
 # define MD5_CHUNK_SIZE 64
 
-void		init_md5(t_hashing *hash);
-void		md5_hash(t_hashing *hash, const char *chunk);
-int			md5_print(t_hashing *hash, const t_input *input);
-int			md5(const t_options *opts,
-				const t_input *input);
+void				init_md5(t_hashing *hash);
+void				md5_hash(t_hashing *hash, const char *chunk);
+int					pprinter(t_hashing *hash, const t_input *input);
 
 /*
 ** Helper prototypes
@@ -30,7 +28,6 @@ int			md5(const t_options *opts,
 
 int					pad_512(t_hashing *hash, ssize_t ret,
 						const char *chunk, uint64_t len);
-
 
 typedef struct		s_interface
 {
@@ -42,7 +39,7 @@ typedef struct		s_interface
 }					t_interface;
 
 static t_interface	g_interface[] = {
-	{MD5, md5_hash, init_md5, pad_512, md5_print},
+	{MD5, md5_hash, init_md5, pad_512, pprinter},
 	{SHA224, NULL, NULL, NULL, NULL},
 	{SHA256, NULL, NULL, NULL, NULL},
 	{SHA384, NULL, NULL, NULL, NULL},

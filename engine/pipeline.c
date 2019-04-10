@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:27:19 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 13:34:07 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,24 @@ static void		prepare(t_hashing *hash,
 {
 	while (g_interface[i].type != SENTINEL)
 	{
-//		printf("uu");
 		if (g_interface[i].type == opts->type)
 		{
 			if ((*g_interface[i].h_f) == NULL)
 				ft_printf("Processing un-implemented algorithm.\n");
 			else
 			{
-				hash->h_f =  (*g_interface[i].h_f);
-				hash->i_f =  (*g_interface[i].i_f);
-				hash->p_f =  (*g_interface[i].p_f);
-				hash->o_f =  (*g_interface[i].o_f);
+				hash->h_f = (*g_interface[i].h_f);
+				hash->i_f = (*g_interface[i].i_f);
+				hash->p_f = (*g_interface[i].p_f);
+				hash->o_f = (*g_interface[i].o_f);
 			}
 		}
 		i++;
 	}
 }
 
-/*
-**
-*/
-
 int				pipeline(const t_options *opts,
-						 const t_input *input)
+					const t_input *input)
 {
 	int			fd;
 	t_hashing	hash;
