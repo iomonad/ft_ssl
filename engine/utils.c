@@ -6,13 +6,16 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:54:01 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/08 11:33:31 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/10 10:50:30 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <engine.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <errno.h>
 
 t_hash		hashtype(char *type)
 {
@@ -79,9 +82,12 @@ void		parseinput(int argc, char *argv[], t_dlist **head)
 int			ffopen(const char *path)
 {
 	int		fd;
+	int		re;
 
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (fferror("error file don't exit", path));
-	else
-		return (fd);
+	if ((re = read(fd, NULL, 0x16)) == -1
+		&& errno == EISDIR)
+		return (fferror("error file is a directory", path));
+	return (fd);
 }
