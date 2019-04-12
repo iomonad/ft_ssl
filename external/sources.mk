@@ -17,7 +17,7 @@ SHA_FLS = sha256.c
 SHA_SRC = $(addprefix $(SHA_PTH), $(SHA_FLS))
 
 COMMONS_PTH = commons/
-COMMONS_FLS = padding.c printer.c
+COMMONS_FLS = padding.c printer.c operations.c operations2.c
 COMMONS_SRC = $(addprefix $(COMMONS_PTH), $(COMMONS_FLS))
 
 CRYPTO_PTH = crypto/
