@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:38:15 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 11:38:58 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,14 @@ static void		prepare(t_hashing *hash,
 	{
 		if (g_interface[i].type == opts->type)
 		{
-			if ((*g_interface[i].h_f) == NULL)
+			if (*(g_interface[i].h_f) == NULL
+				|| *(g_interface[i].i_f) == NULL
+				|| *(g_interface[i].p_f) == NULL
+				|| *(g_interface[i].o_f) == NULL)
+			{
 				ft_printf("Processing un-implemented algorithm.\n");
+				exit(1);
+			}
 			else
 			{
 				hash->h_f = (*g_interface[i].h_f);
