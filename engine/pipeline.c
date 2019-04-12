@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 11:38:58 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:16:59 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,12 @@ int				pipeline(const t_options *opts,
 	int			fd;
 	t_hashing	hash;
 
-	fd = STDIN;
+	fd = STDIN_FILENO;
 	ft_bzero(&hash, sizeof(t_hash));
 	prepare(&hash, opts, 0x0);
-	if (input->method == FARG && input->input != NULL)
+	if (input->method == STDIN)
+		exec(fd, &hash, opts, input);
+	else if (input->method == FARG && input->input != NULL)
 	{
 		if ((fd = ffopen(input->input)) < 0)
 			return (fd);

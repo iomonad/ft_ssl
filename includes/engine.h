@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 12:49:19 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 14:51:01 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 # include <stdint.h>
 
 # define TMD5    "md5"
+# define TSHA224 "sha224"
 # define TSHA256 "sha256"
+# define TSHA384 "sha384"
+# define TSHA512 "sha512"
 
 /*
 ** @info Hashtype datastructure.

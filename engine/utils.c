@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 12:54:01 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 10:50:30 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 14:52:13 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,14 @@ t_hash		hashtype(char *type)
 	{
 		if (ft_strequ(type, TMD5))
 			return (MD5);
+		else if (ft_strequ(type, TSHA224))
+			return (SHA224);
 		else if (ft_strequ(type, TSHA256))
 			return (SHA256);
+		else if (ft_strequ(type, TSHA384))
+			return (SHA384);
+		else if (ft_strequ(type, TSHA512))
+			return (SHA512);
 		else
 			return (UNKNOWN);
 	}
