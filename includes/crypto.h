@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/10 13:40:39 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 12:03:02 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@
 ** MD5 Prototypes
 */
 
-void				init_md5(t_hashing *hash);
+void				md5_init(t_hashing *hash);
 void				md5_hash(t_hashing *hash, const char *chunk);
+
+/*
+** SHA256 Prototypes
+*/
+
+void				sha256_init(t_hashing *hash);
+void				sha256_hash(t_hashing *hash, const char *chunk);
 
 /*
 ** Helper prototypes
@@ -51,9 +58,9 @@ typedef struct		s_interface
 */
 
 static t_interface	g_interface[] = {
-	{MD5, md5_hash, init_md5, pad_512, pprinter},
+	{MD5, md5_hash, md5_init, pad_512, pprinter},
 	{SHA224, NULL, NULL, NULL, NULL},
-	{SHA256, NULL, NULL, NULL, NULL},
+	{SHA256, sha256_hash, sha256_init, pad_512, pprinter},
 	{SHA384, NULL, NULL, NULL, NULL},
 	{SHA512, NULL, NULL, NULL, NULL},
 	{SENTINEL, NULL, NULL, NULL, NULL}

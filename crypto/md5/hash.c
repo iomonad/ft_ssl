@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/09 15:26:24 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/12 11:55:37 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static const	uint32_t g_k[] = {
 ** @note initialize datastructure
 */
 
-void			init_md5(t_hashing *hash)
+void			md5_init(t_hashing *hash)
 {
 	hash->state[0] = 0x67452301;
 	hash->state[1] = 0xefcdab89;
