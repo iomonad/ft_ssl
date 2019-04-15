@@ -8,23 +8,30 @@ SEED=(
 )
 
 FAILURE=()
-
-MINE=~/Projects/ft_ssl/ft_ssl
-ORIG=/sbin/md5
+MINE=(
+	"~/Projects/ft_ssl/ft_ssl md5"
+	#"~/Projects/ft_ssl/ft_ssl sha256"
+)
+EXEC=(
+	/sbin/md5
+	#"openssl sha -sha256 "
+)
 k=0
 
-for i in $SEED; do
-	$MINE md5 $i > /tmp/a
-	$ORIG $i > /tmp/b
+for x in `seq 2`; do
+	for i in $SEED; do
+		eval ${MINE[$x]} $i > /tmp/a
+		eval ${EXEC[$x]} $i > /tmp/b
 
-	DIFF=$(diff /tmp/a /tmp/b)
-	if [ "$DIFF" != "" ]
-	then
-		FAILURE+=($i)
-	else
-		echo "[$k] Test for $i done."
-	fi
-	k=$((k + 1));
+		DIFF=$(diff /tmp/a /tmp/b)
+		if [ "$DIFF" != "" ]
+		then
+			FAILURE+=($i)
+		else
+			echo "[$k] Test for $i done."
+		fi
+		k=$((k + 1));
+	done
 done
 
 echo ""
