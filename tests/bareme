@@ -1,0 +1,4 @@
+#!/bin/zsh
+echo "pickle rick" | openssl md5
+echo "pickle rick" | ./ft_ssl md5
+echo "Do not pity the dead, Harry." | ./ft_ssl md5 -p
