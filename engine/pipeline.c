@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 13:45:57 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:55:53 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static ssize_t	exec(const int fd, t_hashing *hash,
 	hash->p_f(hash, ret, chunk, i * 8);
 	if (opts->p && input->method == STDIN)
 		ft_printf("%s\n", chunk);
-	hash->o_f(hash, input);
+	hash->o_f(hash, input, opts);
 	return (i);
 }
 
@@ -64,7 +64,7 @@ static ssize_t	exec_string(t_hashing *hash,
 		i -= hash->clen;
 	}
 	hash->p_f(hash, i, input->input + (len - i), len * 8);
-	hash->o_f(hash, input);
+	hash->o_f(hash, input, opts);
 	return (i);
 }
 

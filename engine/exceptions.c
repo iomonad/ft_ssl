@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 14:53:41 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 13:56:59 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:31:40 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 
 static void	invalid_algo(char *tipep)
 {
-	ft_fprintf(2, "ft_ssl: Error: '%s' is an invalid command.\n", tipep);
-	ft_fprintf(2, "Standard commands:\n\n");
+	ft_fprintf(2, "ft_ssl: Error: '%s' is an invalid command.\n\n", tipep);
 	ft_fprintf(2, "Message Digest commands:\nmd5\nsha224\nsha256\n");
 	exit(1);
 }

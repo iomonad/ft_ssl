@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 13:54:42 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:59:32 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int					pad_512(t_hashing *hash, ssize_t ret,
 						const char *chunk, uint64_t len);
 int					pad_sha256(t_hashing *hash, ssize_t ret,
 						const char *buf, uint64_t len);
-int					pprinter(t_hashing *hash, const t_input *input);
-int					pprinter256(t_hashing *hash, const t_input *input);
+int					pprinter(t_hashing *hash, const t_input *input,
+						const t_options *opts);
+int					pprinter256(t_hashing *hash, const t_input *input,
+								const t_options *opts);
 uint32_t			right_rotate(uint32_t n, uint32_t d);
 uint32_t			choose256(uint32_t x, uint32_t y, uint32_t z);
 uint32_t			majority256(uint32_t x, uint32_t y, uint32_t z);
@@ -68,7 +70,8 @@ typedef struct		s_interface
 	void			(*h_f)(struct s_hashing *, const char *);
 	void			(*i_f)(struct s_hashing *);
 	int				(*p_f)(struct s_hashing *, ssize_t, const char *, uint64_t);
-	int				(*o_f)(struct s_hashing *, const struct s_input *);
+	int				(*o_f)(struct s_hashing *, const struct s_input *,
+						const struct s_options *);
 }					t_interface;
 
 /*
