@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 13:29:52 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 14:41:23 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:15:17 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int				pprinter(t_hashing *hash,
 	i = 0;
 	str = (char*)hash->state;
 	if (input->method == FARG)
-		ft_printf("MD5 (%s) = ", input->input);
+		ft_printf("%s (%s) = ", hash->algo, input->input);
 	else if (input->method == STRING)
-		ft_printf("MD5 (\"%s\") = ", input->input);
+		ft_printf("%s (\"%s\") = ", hash->algo, input->input);
 	while (i < hash->dlen)
 		ft_printf("%2.2hhx", str[i++]);
 	write(1, "\n", 1);
@@ -44,9 +44,9 @@ int				pprinter256(t_hashing *hash,
 	i = 0;
 	str = (char*)hash->state;
 	if (input->method == FARG)
-		ft_printf("SHA256 (%s) = ", input->input);
+		ft_printf("%s (%s) = ", hash->algo, input->input);
 	else if (input->method == STRING)
-		ft_printf("SHA256 (\"%s\") = ", input->input);
+		ft_printf("%s (\"%s\") = ", hash->algo, input->input);
 	while (i < 8)
 	{
 		hash->state[i] = bswap32(hash->state[i]);

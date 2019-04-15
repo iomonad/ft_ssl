@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 11:47:22 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 13:43:36 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:17:15 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void				sha256_init(t_hashing *hash)
 	hash->state[7] = 0x5be0cd19;
 	hash->dlen = 32;
 	hash->clen = 64;
+	ft_strcpy(hash->algo, "SHA256");
 }
 
 static void			hash_loop(uint32_t *x, uint32_t *words)

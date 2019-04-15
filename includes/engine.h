@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 09:46:17 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:00:08 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct	s_hashing
 	void		(*i_f)(struct s_hashing *);
 	int			(*p_f)(struct s_hashing *, ssize_t, const char *, uint64_t);
 	int			(*o_f)(struct s_hashing *, const struct s_input *);
-	char		*output;
+	char		algo[16];
 }				t_hashing;
 
 /*

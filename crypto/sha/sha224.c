@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:50:04 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 13:54:12 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:16:53 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	sha224_init(t_hashing *hash)
 	hash->state[7] = 0xbefa4fa4;
 	hash->dlen = 28;
 	hash->clen = 64;
+	ft_strcpy(hash->algo, "SHA224");
 }

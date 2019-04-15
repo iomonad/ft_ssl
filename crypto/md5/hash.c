@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:33:05 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 11:55:37 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 14:17:16 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			md5_init(t_hashing *hash)
 	hash->state[3] = 0x10325476;
 	hash->dlen = 16;
 	hash->clen = 64;
+	ft_strcpy(hash->algo, "MD5");
 }
 
 /*
