@@ -13,7 +13,7 @@ MD5_FLS = hash.c
 MD5_SRC = $(addprefix $(MD5_PTH), $(MD5_FLS))
 
 SHA_PTH = sha/
-SHA_FLS = sha256.c
+SHA_FLS = sha256.c sha224.c
 SHA_SRC = $(addprefix $(SHA_PTH), $(SHA_FLS))
 
 COMMONS_PTH = commons/

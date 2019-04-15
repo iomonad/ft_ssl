@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:13:11 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 09:46:05 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 13:54:42 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void				md5_hash(t_hashing *hash, const char *chunk);
 
 void				sha256_init(t_hashing *hash);
 void				sha256_hash(t_hashing *hash, const char *chunk);
+
+/*
+** SHA224 Prototypes
+*/
+
+void				sha224_init(t_hashing *hash);
 
 /*
 ** Helper prototypes
@@ -71,7 +77,7 @@ typedef struct		s_interface
 
 static t_interface	g_interface[] = {
 	{MD5, md5_hash, md5_init, pad_512, pprinter},
-	{SHA224, NULL, NULL, NULL, NULL},
+	{SHA224, sha256_hash, sha224_init, pad_sha256, pprinter256},
 	{SHA256, sha256_hash, sha256_init, pad_sha256, pprinter256},
 	{SHA384, NULL, NULL, NULL, NULL},
 	{SHA512, NULL, NULL, NULL, NULL},
