@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 13:59:06 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 14:51:01 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 09:46:17 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,8 @@ int				ffopen(const char *path);
 void			usage(void);
 int				pipeline(const t_options *opts,
 					const t_input *input);
+uint_fast32_t	clean_runtime(t_input *input,
+						t_options *opts,
+						t_dlist *dlist);
 
 #endif
