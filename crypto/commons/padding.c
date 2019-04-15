@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 15:19:35 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/12 14:23:40 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/15 10:15:05 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int			pad_512(t_hashing *hash,
 				const char *chunk,
 				uint64_t len)
 {
-	char	data[2048];
+	char	data[255];
 
 	ft_memcpy(data, chunk, ret);
 	data[ret++] = 0x80;
 	while (ret % hash->clen != hash->clen - 8)
 		data[ret++] = 0x00;
 	ft_memcpy(data + ret, &len, sizeof(len));
-	md5_hash(hash, data);
+	hash->h_f(hash, data);
 	if (ret > hash->clen)
-		md5_hash(hash, data);
+		hash->h_f(hash, data + hash->clen);
 	return (1);
 }
 
@@ -35,7 +35,7 @@ int			pad_sha256(t_hashing *hash,
 				const char *chunk,
 				uint64_t len)
 {
-	char	data[128];
+	char	data[255];
 
 	ft_memcpy(data, chunk, ret);
 	data[ret++] = 0x80;
