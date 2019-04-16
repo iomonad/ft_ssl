@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 12:04:46 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/04 14:48:18 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/16 11:43:26 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int				main(int argc, char *argv[])
 	if (plist == NULL)
 		memoize(STDIN, NULL, &plist);
 	if (is_handlable(&opts, argv[1]))
-		return (process(&opts, plist));
-	return (0);
+		process(&opts, plist);
+	return (clean_runtime(&opts, &plist));
 }

@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/15 14:55:53 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/16 11:50:15 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,7 @@ int				pipeline(const t_options *opts,
 	}
 	else if (input->method == STRING && input->input != NULL)
 		exec_string(&hash, opts, input);
+	if (input->method != STDIN)
+		free(input->input);
 	return (0);
 }
