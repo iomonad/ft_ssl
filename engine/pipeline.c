@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:37:26 by iomonad           #+#    #+#             */
-/*   Updated: 2019/04/16 11:50:15 by iomonad          ###   ########.fr       */
+/*   Updated: 2019/04/16 13:20:50 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static ssize_t	exec_string(t_hashing *hash,
 	hash->i_f(hash);
 	len = ft_strlen(input->input);
 	i = len;
-	(void)opts;
 	while (i > hash->clen)
 	{
 		hash->h_f(hash, input->input + (len - i));
